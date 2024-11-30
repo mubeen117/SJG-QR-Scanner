@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const { name, email, password, isAdmin } = await request.json();
     const db = await createConnection();
 
-    // Check if email is already registered
+   
     const [existingUser] = await db.execute(
       'SELECT * FROM users WHERE email = ?',
       [email]

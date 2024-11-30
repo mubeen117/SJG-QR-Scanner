@@ -26,8 +26,7 @@ export default function Dashboard() {
    
       <button
         onClick={handleLogout} 
-        className="bg-red-500 text-white p-2 rounded-lg"
-      >
+        className="bg-red-500 text-white p-2 rounded-lg" >
         Logout
       </button>
     </div>

@@ -14,8 +14,8 @@ interface Product {
   ID: string;
   SAP_ID: string;
   productName: string;
-  qr_code?: string; 
-  Date: string; 
+  qr_code?: string;
+  Date: string;
 }
 
 export default function Dashboard() {
@@ -74,7 +74,7 @@ export default function Dashboard() {
     setSelectedProduct(product);
     setFormData({
       ...product,
-      Date: formatDate(product.Date), 
+      Date: formatDate(product.Date),
     });
     setIsModalOpen(true);
   };
@@ -109,7 +109,7 @@ export default function Dashboard() {
     try {
       const base64String = await toBase64(file);
       const trimmedBase64 = (base64String as string).replace(/^data:application\/pdf;base64,/, '');
-      setFormData({ ...formData, qr_code: trimmedBase64 }); 
+      setFormData({ ...formData, qr_code: trimmedBase64 });
     } catch (error) {
       console.error('Error converting file to Base64:', error);
     }
@@ -150,7 +150,7 @@ export default function Dashboard() {
           product.ID === formData.ID ? formData : product
         )
       );
-      closeModal(); 
+      closeModal();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -227,26 +227,23 @@ export default function Dashboard() {
                     <td className="px-2 py-1 flex flex-col justify-center items-center space-y-1 sm:flex-row sm:space-y-0 sm:space-x-2">
                       <button
                         onClick={() => openModal(product)}
-                        className="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-green-600"
-                      >
+                        className="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-green-600" >
                         Update
                       </button>
 
-                    
+
                       <button
                         onClick={() => router.push(`/leaflet?id=${product.ID}`)}
-                        className="bg-green-500 text-white px-2 py-1 rounded text-xs"
-                      >
+                        className="bg-green-500 text-white px-2 py-1 rounded text-xs">
                         View
                       </button>
 
-                    
+
                       <button
                         className="bg-yellow-500 text-white px-2 py-1 rounded text-xs"
                         onClick={() => {
                           window.location.href = `/download?id=${product.ID},${product.productName}`;
-                        }}
-                      >
+                        }} >
                         Download
                       </button>
                     </td>
@@ -272,8 +269,7 @@ export default function Dashboard() {
                     value={formData.SAP_ID}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required
-                  />
+                    required />
                 </div>
 
 
@@ -286,8 +282,7 @@ export default function Dashboard() {
                     value={formData.productName}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required
-                  />
+                    required />
                 </div>
                 <div>
                   <label htmlFor="Date" className="block text-sm">Date</label>
@@ -298,8 +293,7 @@ export default function Dashboard() {
                     value={formData.Date}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required
-                  />
+                    required />
                 </div>
                 <div>
                   <label htmlFor="qr_code" className="block text-sm">Upload PDF</label>
@@ -309,22 +303,19 @@ export default function Dashboard() {
                     name="qr_code"
                     onChange={handleFileChange}
                     accept="application/pdf"
-                    className="w-full border rounded p-2 mt-1"
-                  />
+                    className="w-full border rounded p-2 mt-1" />
                   {fileName && <p className="text-sm mt-2">Selected file: {fileName}</p>}
                 </div>
                 <div className="flex justify-between">
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="bg-gray-400 text-white px-4 py-1 rounded-md hover:bg-gray-500"
-                  >
+                    className="bg-gray-400 text-white px-4 py-1 rounded-md hover:bg-gray-500" >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"
-                  >
+                    className="bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600" >
                     Update
                   </button>
                 </div>

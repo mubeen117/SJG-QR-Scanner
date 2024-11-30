@@ -55,10 +55,10 @@ export default function LoginForm() {
             const result = await response.json();
 
             if (response.ok) {
-                // Store the token in localStorage
+
                 localStorage.setItem("token", result.token);
 
-                // Redirect to the dashboard
+
                 router.push("/dashboard");
             } else {
                 setServerError(result.error || "Invalid credentials.");
@@ -112,8 +112,7 @@ export default function LoginForm() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your password"
-                        />
+                            placeholder="Enter your password" />
                         {error?.password && (
                             <div className="text-red-500 text-sm mt-1">{error.password}</div>
                         )}
@@ -123,9 +122,8 @@ export default function LoginForm() {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${
-                                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                            className={`w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                         >
                             {isSubmitting ? "Logging in..." : "Login"}
                         </button>

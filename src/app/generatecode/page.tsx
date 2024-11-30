@@ -23,15 +23,13 @@
         type="text"
         placeholder="Enter URL or text to generate QR Code"
         value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        />
+        onChange={(e) => setUrl(e.target.value)} />
 
         <div className="text-box">
         <a
           href="#"
           onClick={generateQrCode}
-          className="inline-block px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-500 transition duration-200"
-        >
+          className="inline-block px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-500 transition duration-200" >
           Generate
         </a>
         </div>
@@ -42,8 +40,7 @@
         <a
            className="text-blue-600 hover:underline"
            href={qrcode}
-           download="qrCode.png"
-          >
+           download="qrCode.png" >
             Download QR Code
           </a>
         </div>

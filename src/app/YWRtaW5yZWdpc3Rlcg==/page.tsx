@@ -53,7 +53,7 @@ export default function RegisterForm() {
         }
 
         setIsSubmitting(true);
-        setServerError(null); 
+        setServerError(null);
         try {
             const response = await fetch("/api/auth/adminreg", {
                 method: "POST",
@@ -65,7 +65,7 @@ export default function RegisterForm() {
                     email,
                     password,
                     confirmPassword,
-                    isAdmin, 
+                    isAdmin,
                 }),
             });
 
@@ -75,7 +75,7 @@ export default function RegisterForm() {
                 console.log("Registration successful:", result);
                 alert("User registered successfully!");
 
-               
+
                 router.push("/login");
             } else {
                 console.error("Registration failed:", result);
@@ -94,7 +94,7 @@ export default function RegisterForm() {
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Register</h2>
 
-       
+
                 {serverError && (
                     <div className="text-red-500 text-sm mb-4 text-center font-medium">
                         {serverError}
@@ -102,7 +102,7 @@ export default function RegisterForm() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  
+
                     <div>
                         <label htmlFor="name" className="block text-gray-700 font-medium">
                             Name
@@ -114,14 +114,13 @@ export default function RegisterForm() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your name"
-                        />
+                            placeholder="Enter your name" />
                         {error?.name && (
                             <div className="text-red-500 text-sm mt-1">{error.name}</div>
                         )}
                     </div>
 
-                  
+
                     <div>
                         <label htmlFor="email" className="block text-gray-700 font-medium">
                             Email
@@ -133,14 +132,13 @@ export default function RegisterForm() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your email"
-                        />
+                            placeholder="Enter your email" />
                         {error?.email && (
                             <div className="text-red-500 text-sm mt-1">{error.email}</div>
                         )}
                     </div>
 
-                  
+
                     <div>
                         <label htmlFor="password" className="block text-gray-700 font-medium">
                             Password
@@ -152,14 +150,13 @@ export default function RegisterForm() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your password"
-                        />
+                            placeholder="Enter your password" />
                         {error?.password && (
                             <div className="text-red-500 text-sm mt-1">{error.password}</div>
                         )}
                     </div>
 
-                  
+
                     <div>
                         <label htmlFor="confirmPassword" className="block text-gray-700 font-medium">
                             Confirm Password
@@ -171,36 +168,32 @@ export default function RegisterForm() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Confirm your password"
-                        />
+                            placeholder="Confirm your password" />
                         {error?.confirmPassword && (
                             <div className="text-red-500 text-sm mt-1">{error.confirmPassword}</div>
                         )}
                     </div>
 
-                  
+
                     <div className="flex items-center space-x-2">
                         <input
                             type="checkbox"
                             id="isAdmin"
                             checked={isAdmin}
                             onChange={(e) => setIsAdmin(e.target.checked)}
-                            className="w-4 h-4"
-                        />
+                            className="w-4 h-4" />
                         <label htmlFor="isAdmin" className="text-gray-700">
                             Register as Admin
                         </label>
                     </div>
 
-                  
+
                     <div>
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${
-                                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
-                        >
+                            className={`w-full py-2 px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                                }`} >
                             {isSubmitting ? "Registering..." : "Register"}
                         </button>
                     </div>
