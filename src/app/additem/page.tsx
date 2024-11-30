@@ -96,7 +96,7 @@ export default function AddItemForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex text-black justify-center items-center min-h-screen bg-gray-100">
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
           <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-lg relative">

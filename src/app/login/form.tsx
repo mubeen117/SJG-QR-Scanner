@@ -72,7 +72,7 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+        <div className="flex text-black justify-center items-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
