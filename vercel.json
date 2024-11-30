@@ -1,18 +1,14 @@
 {
-    "version": 2,
-    "build": {
-      "env": {
-        "NEXT_PUBLIC_ENV_VARIABLE": "value"
-      }
-    },
-    "lint": {
-      "ignoreDuringBuilds": true
-    },
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_ENV_VARIABLE": "value"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
