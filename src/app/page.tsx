@@ -8,6 +8,6 @@ return (
     <div>
       <link rel="icon" href="/favicon.ico" />
       <Login/>
-      <h1>sjg</h1>
+
     </div>
     )}
