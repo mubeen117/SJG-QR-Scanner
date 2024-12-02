@@ -1,14 +1,25 @@
 {
   "version": 2,
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_ENV_VARIABLE": "value"
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
     }
-  },
+  ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/$1"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_HOST": "your-database-host",
+    "DATABASE_USER": "your-database-username",
+    "DATABASE_PASSWORD": "your-database-password",
+    "DATABASE_NAME": "your-database-name"
+  }
 }
