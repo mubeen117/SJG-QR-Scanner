@@ -14,8 +14,8 @@ interface Product {
   ID: string;
   SAP_ID: string;
   productName: string;
-  qr_code?: string;
-  Date: string;
+  qr_code?: string; 
+  Date: string; 
 }
 
 export default function Dashboard() {
@@ -25,6 +25,8 @@ export default function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [formData, setFormData] = useState<Product>({
     ID: '',
     SAP_ID: '',
@@ -32,7 +34,7 @@ export default function Dashboard() {
     qr_code: '',
     Date: '',
   });
-  const [fileName, setFileName] = useState<string>(''); // File name for PDF upload
+  const [fileName, setFileName] = useState<string>(''); 
 
   const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('token') !== null;
 
@@ -62,6 +64,17 @@ export default function Dashboard() {
     }
   }, [isLoggedIn, router]);
 
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = products.filter((product) =>
+      product.productName.toLowerCase().includes(query)
+    );
+    setFilteredProducts(filtered);
+  };
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -74,7 +87,7 @@ export default function Dashboard() {
     setSelectedProduct(product);
     setFormData({
       ...product,
-      Date: formatDate(product.Date),
+      Date: formatDate(product.Date), 
     });
     setIsModalOpen(true);
   };
@@ -98,7 +111,7 @@ export default function Dashboard() {
       return;
     }
 
-    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; 
     if (file.size > MAX_FILE_SIZE) {
       alert('File size exceeds the 5 MB limit. Please upload a smaller file.');
       return;
@@ -109,7 +122,7 @@ export default function Dashboard() {
     try {
       const base64String = await toBase64(file);
       const trimmedBase64 = (base64String as string).replace(/^data:application\/pdf;base64,/, '');
-      setFormData({ ...formData, qr_code: trimmedBase64 });
+      setFormData({ ...formData, qr_code: trimmedBase64 }); 
     } catch (error) {
       console.error('Error converting file to Base64:', error);
     }
@@ -150,7 +163,7 @@ export default function Dashboard() {
           product.ID === formData.ID ? formData : product
         )
       );
-      closeModal();
+      closeModal(); 
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -205,7 +218,17 @@ export default function Dashboard() {
             Generate QR Code
           </button>
         </header>
-
+        <div className="p-2 lg:p-4">
+          <div className="mb-4">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search Product Name"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+         </div>
         <main className="p-2 lg:p-4">
           <h1 className="text-xl font-semibold text-gray-700 text-center mb-4">Products</h1>
           <div className="overflow-auto bg-white shadow rounded-lg p-2 lg:p-4">
@@ -219,36 +242,19 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => (
-                  <tr key={index} className="border-t">
-                    <td className="px-2 py-1">{product.ID}</td>
-                    <td className="px-2 py-1">{product.SAP_ID}</td>
-                    <td className="px-2 py-1">{product.productName}</td>
-                    <td className="px-2 py-1 flex flex-col justify-center items-center space-y-1 sm:flex-row sm:space-y-0 sm:space-x-2">
-                      <button
-                        onClick={() => openModal(product)}
-                        className="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-green-600" >
-                        Update
-                      </button>
+              {[...filteredProducts, ...products].map((product, index) => (
+              <tr key={index} className="border-t">
+              <td className="px-2 py-1">{product.ID}</td>
+              <td className="px-2 py-1">{product.SAP_ID}</td>
+              <td className="px-2 py-1">{product.productName}</td>
+              <td className="px-2 py-1 flex flex-col justify-center items-center space-y-1 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <button onClick={() => openModal(product)} className="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-green-600"> Update </button>
+              <button onClick={() => (window.location.href = `/leaflet?id=${product.ID}`)} className="bg-green-500 text-white px-2 py-1 rounded text-xs"> View</button>
+              <button className="bg-yellow-500 text-white px-2 py-1 rounded text-xs" onClick={() => { window.location.href = `/download?id=${product.ID},${product.productName}`;}}> Download </button>
+              </td>
+              </tr>
+               ))}
 
-
-                      <button
-                        onClick={() => router.push(`/leaflet?id=${product.ID}`)}
-                        className="bg-green-500 text-white px-2 py-1 rounded text-xs">
-                        View
-                      </button>
-
-
-                      <button
-                        className="bg-yellow-500 text-white px-2 py-1 rounded text-xs"
-                        onClick={() => {
-                          window.location.href = `/download?id=${product.ID},${product.productName}`;
-                        }} >
-                        Download
-                      </button>
-                    </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>
@@ -269,7 +275,8 @@ export default function Dashboard() {
                     value={formData.SAP_ID}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required />
+                    required
+                  />
                 </div>
 
 
@@ -282,7 +289,8 @@ export default function Dashboard() {
                     value={formData.productName}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required />
+                    required
+                  />
                 </div>
                 <div>
                   <label htmlFor="Date" className="block text-sm">Date</label>
@@ -293,7 +301,8 @@ export default function Dashboard() {
                     value={formData.Date}
                     onChange={handleInputChange}
                     className="w-full border rounded p-2 mt-1"
-                    required />
+                    required
+                  />
                 </div>
                 <div>
                   <label htmlFor="qr_code" className="block text-sm">Upload PDF</label>
@@ -303,19 +312,22 @@ export default function Dashboard() {
                     name="qr_code"
                     onChange={handleFileChange}
                     accept="application/pdf"
-                    className="w-full border rounded p-2 mt-1" />
+                    className="w-full border rounded p-2 mt-1"
+                  />
                   {fileName && <p className="text-sm mt-2">Selected file: {fileName}</p>}
                 </div>
                 <div className="flex justify-between">
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="bg-gray-400 text-white px-4 py-1 rounded-md hover:bg-gray-500" >
+                    className="bg-gray-400 text-white px-4 py-1 rounded-md hover:bg-gray-500"
+                  >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600" >
+                    className="bg-blue-500 text-white px-4 py-1 rounded-md hover:bg-blue-600"
+                  >
                     Update
                   </button>
                 </div>
