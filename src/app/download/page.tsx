@@ -27,7 +27,7 @@ export default function Download() {
 
         const link = document.createElement("a");
         link.href = `data:application/pdf;base64,${base64String}`;
-        link.download = "example.pdf";
+        link.download = "SJGleaflet.pdf";
         const check = response
         console.log(check)
         console.log("check")
